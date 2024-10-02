@@ -1,4 +1,4 @@
-import Coin from "./classes/Coin";
+import Currency from "./classes/Currency";
 import roundToCents from "./roundToCents";
 
-export { Coin, roundToCents };
+export { Currency, roundToCents };

@@ -1,18 +1,18 @@
 'use client'
 
-import { Coin, IProduct } from "@/src/core";
+import { Currency, IProduct } from "@/src/core";
 import { IconShoppingCartPlus } from '@tabler/icons-react';
 import Image from "next/image";
 import Link from "next/link";
 import { StarRating } from "../shared";
 
-export interface ProductItemProps {
+interface ProductItemProps {
   product: IProduct
 }
 
 export default function ProductItem({ product }: Readonly<ProductItemProps>) {
   const { name, id, image, specifications, basePrice, promotionalPrice, rating } = product;
-  const { format } = Coin
+  const { format } = Currency
 
   return (
     <Link
@@ -57,7 +57,7 @@ export default function ProductItem({ product }: Readonly<ProductItemProps>) {
           }}
         >
           <IconShoppingCartPlus />
-          <span>Add to Cart</span>
+          <span>Add Item</span>
         </button>
       </div>
     </Link>

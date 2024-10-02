@@ -1,8 +1,4 @@
-/**
- * Coin provides a method to format a number as a currency 
- * string based on specified locale and currency.
- */
-export default class Coin {
+export default class Currency {
   /**
    * The format function takes a number value and returns it formatted as a currency
    * string based on the specified locale and currency.
