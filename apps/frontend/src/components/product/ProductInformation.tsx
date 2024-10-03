@@ -1,4 +1,4 @@
-import { IProduct } from '@/src/core';
+import { IProduct } from '@gstore/core';
 import Image from 'next/image';
 import ProductSpecifications from './ProductSpecifications';
 

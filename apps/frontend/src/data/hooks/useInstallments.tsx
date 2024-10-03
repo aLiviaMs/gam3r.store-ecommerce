@@ -1,4 +1,4 @@
-import { CalculateInstallment } from '@/src/core'
+import { CalculateInstallment } from '@gstore/core'
 
 /**
  * useInstallments Hook

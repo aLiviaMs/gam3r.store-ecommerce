@@ -1,7 +1,7 @@
 'use client'
 
-import { Currency, IProduct } from '@/src/core';
 import useInstallments from '@/src/data/hooks/useInstallments';
+import { Currency, IProduct } from '@gstore/core';
 import { IconCreditCard, IconShoppingCart } from '@tabler/icons-react';
 import { useRouter } from 'next/navigation';
 

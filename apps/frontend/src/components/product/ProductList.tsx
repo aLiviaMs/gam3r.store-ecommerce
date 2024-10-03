@@ -1,6 +1,6 @@
 'use client'
 
-import { products } from '@/src/core'
+import { products } from '@gstore/core'
 import ProductItem from './ProductItem'
 import ProductNotFound from './ProductNotFound'
 

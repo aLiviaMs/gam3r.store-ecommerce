@@ -1,6 +1,6 @@
 'use client'
 
-import { Currency, IProduct } from "@/src/core";
+import { Currency, IProduct } from "@gstore/core";
 import { IconShoppingCartPlus } from '@tabler/icons-react';
 import Image from "next/image";
 import Link from "next/link";

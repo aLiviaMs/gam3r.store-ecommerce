@@ -1,6 +1,6 @@
 import { ProductInformation, ProductNotFound, ProductTitle } from "@/src/components";
 import ProductPurchaseBanner from "@/src/components/product/ProductPurchaseBanner";
-import { products } from "@/src/core";
+import { products } from "@gstore/core";
 
 interface ProductPageProps {
   params: {
