@@ -26,7 +26,7 @@ export interface ProductPurchaseBannerProps {
  * <ProductPurchaseBanner product={someProduct} />
  * ```
  */
-export default function ProductPurchaseBanner({product}: ProductPurchaseBannerProps) {
+export default function ProductPurchaseBanner({product}: Readonly<ProductPurchaseBannerProps>) {
   const router = useRouter();
   const { promotionalPrice, basePrice } = product;
 
@@ -37,10 +37,10 @@ export default function ProductPurchaseBanner({product}: ProductPurchaseBannerPr
 	return (
 		<div className="flex">
 			<div className="flex flex-col border-r border-zinc-500 pr-5">
-				<div className="line-through text-zinc-400">from $ {basePrice}</div>
+				<div className="line-through text-zinc-400">from {Currency.format(basePrice)}</div>
 				<div className="text-2xl font-semibold">
 					<span className="text-base text-zinc-300">for</span>{' '}
-					<span className="text-emerald-500">$ {promotionalPrice}</span>{' '}
+					<span className="text-emerald-500">{Currency.format(promotionalPrice)}</span>{' '}
 					<span className="text-base text-zinc-300">in cash</span>
 				</div>
 			</div>

@@ -2,9 +2,10 @@ import ProductInformation from "./ProductInformation";
 import ProductItem from "./ProductItem";
 import ProductList from "./ProductList";
 import ProductNotFound from "./ProductNotFound";
+import ProductPriceMeter from "./ProductPriceMeter";
 import ProductPurchaseBanner from "./ProductPurchaseBanner";
 import ProductSpecifications from "./ProductSpecifications";
 import ProductTitle from "./ProductTitle";
 
-export { ProductInformation, ProductItem, ProductList, ProductNotFound, ProductPurchaseBanner, ProductSpecifications, ProductTitle };
+export { ProductInformation, ProductItem, ProductList, ProductNotFound, ProductPriceMeter, ProductPurchaseBanner, ProductSpecifications, ProductTitle };
 
