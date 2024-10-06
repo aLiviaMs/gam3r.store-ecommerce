@@ -1,5 +1,7 @@
 'use client'
 
+import useCart from "@/src/data/hooks/useCart";
+import useInstallments from "@/src/data/hooks/useInstallments";
 import { Currency, IProduct } from "@gstore/core";
 import { IconShoppingCartPlus } from '@tabler/icons-react';
 import Image from "next/image";
@@ -12,7 +14,9 @@ interface ProductItemProps {
 
 export default function ProductItem({ product }: Readonly<ProductItemProps>) {
   const { name, id, image, specifications, basePrice, promotionalPrice, rating } = product;
-  const { format } = Currency
+  const { format } = Currency;
+  const { addItem } = useCart()
+  const installments = useInstallments(promotionalPrice)
 
   return (
     <Link
@@ -45,15 +49,15 @@ export default function ProductItem({ product }: Readonly<ProductItemProps>) {
             {format(promotionalPrice)}
           </span>
           <span className="text-zinc-400 text-xs">
-            {/* até {format()}x de {' '}
-            {format()} */}
+            até {installments.installmentCount}x de {' '}
+            {format(installments.feeValue)}
           </span>
         </div>
         <button
           className="flex justify-center items-center gap-2 h-8 bg-violet-700 hover:border-2 border-emerald-500 rounded-full"
           onClick={(e) => {
             e.preventDefault()
-            // TODO: add item
+            addItem(product)
           }}
         >
           <IconShoppingCartPlus />

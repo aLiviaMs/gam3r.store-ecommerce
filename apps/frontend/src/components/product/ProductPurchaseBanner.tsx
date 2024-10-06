@@ -1,5 +1,6 @@
 'use client'
 
+import useCart from '@/src/data/hooks/useCart';
 import useInstallments from '@/src/data/hooks/useInstallments';
 import { Currency, IProduct } from '@gstore/core';
 import { IconCreditCard, IconShoppingCart } from '@tabler/icons-react';
@@ -30,8 +31,7 @@ export default function ProductPurchaseBanner({product}: Readonly<ProductPurchas
   const router = useRouter();
   const { promotionalPrice, basePrice } = product;
 
-  // TODO: create useCart hook
-	// const { addItem } = useCart()
+	const { addItem } = useCart()
 	const { installmentCount, installmentValue} = useInstallments(promotionalPrice)
 
 	return (
@@ -51,8 +51,7 @@ export default function ProductPurchaseBanner({product}: Readonly<ProductPurchas
 			<div className="flex gap-2 items-center">
 				<button
 					className="flex-1 button bg-pink-600"
-					onClick={() => {}}
-					// onClick={() => addItem(product)}
+					onClick={() => addItem(product)}
 				>
 					<IconShoppingCart size={20} />
 					<span>Add Item</span>
@@ -60,7 +59,7 @@ export default function ProductPurchaseBanner({product}: Readonly<ProductPurchas
 				<button
 					className="flex-1 button bg-violet-700"
 					onClick={() => {
-						// addItem(product)
+						addItem(product)
 						router.push('/checkout/payment')
 					}}
 				>

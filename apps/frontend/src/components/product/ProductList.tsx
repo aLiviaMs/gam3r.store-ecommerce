@@ -1,6 +1,6 @@
 'use client'
 
-import { products } from '@gstore/core'
+import useProducts from '@/src/data/hooks/useProducts'
 import ProductItem from './ProductItem'
 import ProductNotFound from './ProductNotFound'
 
@@ -24,7 +24,7 @@ import ProductNotFound from './ProductNotFound'
  * ```
  */
 export default function ProductList() {
-  // TODO: Create hook to useProducts
+  const { products } = useProducts()
 
   return products.length ? (
     <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-5">

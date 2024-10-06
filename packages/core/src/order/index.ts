@@ -4,4 +4,5 @@ import IAddressOrder from './IAddressOrder';
 import IItemOrder from "./IItemOrder";
 import IOrder from "./IOrder";
 
-export type { EnumOrderStatus, EnumPurchaseType, IAddressOrder, IItemOrder, IOrder };
+export { EnumOrderStatus, EnumPurchaseType };
+export type { IAddressOrder, IItemOrder, IOrder };

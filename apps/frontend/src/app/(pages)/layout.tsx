@@ -1,4 +1,7 @@
 import { Page } from "@/src/components";
+import { CartProvider } from "@/src/data/contexts/ContextCart";
+import { PaymentProvider } from "@/src/data/contexts/ContextPayment";
+import { ProductsProvider } from "@/src/data/contexts/ContextProducts";
 
 interface LayoutProps {
   children: JSX.Element,
@@ -6,8 +9,12 @@ interface LayoutProps {
 
 export default function Layout({children}: LayoutProps) {
   return (
-    <Page>
-      {children}
-    </Page>
+    <ProductsProvider>
+      <CartProvider>
+        <PaymentProvider>
+          <Page>{children}</Page>
+        </PaymentProvider>
+      </CartProvider>
+    </ProductsProvider>
   )
 }

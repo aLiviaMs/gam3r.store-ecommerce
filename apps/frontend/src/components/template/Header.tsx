@@ -1,10 +1,11 @@
-import Link from 'next/link'
-import CartIcon from '../shared/CartIcon'
-import Logo from '../shared/Logo'
+'use client'
+import useCart from '@/src/data/hooks/useCart';
+import Link from 'next/link';
+import CartIcon from '../shared/CartIcon';
+import Logo from '../shared/Logo';
 
 export default function Header() {
-  const itemsCount = 0
-  // TODO: create a hook useCart
+	const { itemCount } = useCart()
   
 	return (
 		<div
@@ -17,7 +18,7 @@ export default function Header() {
 				<div className="flex justify-between items-center">
 					<Logo />
 					<Link href="/checkout/cart">
-						<CartIcon itemsCount={itemsCount} />
+						<CartIcon itemsCount={itemCount} />
 					</Link>
 				</div>
 			</div>

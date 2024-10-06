@@ -20,13 +20,13 @@ export interface ProductPriceMeterProps {
  * @param props - The component props.
  * @returns A React component that renders the price meter.
  */
-export default function ProductProductPriceMeter(props: Readonly<ProductPriceMeterProps>) {
+export default function ProductProductPriceMeter({product}: Readonly<ProductPriceMeterProps>) {
     const {
         lowestPrice: minimum,
         highestPrice: maximum,
         promotionalPrice: current,
         averagePrice: average,
-    } = props.product
+    } = product
 
     /**
      * Calculates the percentage position of the current price on the price meter.

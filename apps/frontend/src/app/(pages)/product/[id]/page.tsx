@@ -1,5 +1,4 @@
-import { ProductInformation, ProductNotFound, ProductPriceMeter, ProductTitle } from "@/src/components";
-import ProductPurchaseBanner from "@/src/components/product/ProductPurchaseBanner";
+import { ExpertReview, ProductInformation, ProductNotFound, ProductPriceMeter, ProductPurchaseBanner, ProductTitle, UserReview } from "@/src/components";
 import { products } from "@gstore/core";
 
 interface ProductPageProps {
@@ -20,6 +19,8 @@ export default function ProductPage({ params }: Readonly<ProductPageProps>) {
         <ProductPurchaseBanner product={product} />
         <ProductPriceMeter product={product} />
       </div>
+      <UserReview product={product} />
+      <ExpertReview product={product}/>
     </div>
   ) : <ProductNotFound />
 }
