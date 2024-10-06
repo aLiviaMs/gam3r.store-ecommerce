@@ -1,6 +1,6 @@
 'use client'
 import { FilterProducts, IProduct } from '@gstore/core'
-import { createContext, useCallback, useEffect, useState } from 'react'
+import { createContext, ReactNode, useCallback, useEffect, useState } from 'react'
 import useAPI from '../hooks/useAPI'
 
 export interface IProductsContextProps {
@@ -12,34 +12,49 @@ export interface IProductsContextProps {
 
 const ProductsContext = createContext<IProductsContextProps>({} as IProductsContextProps)
 
-export function ProductsProvider(props: {children: JSX.Element}) {
+interface ProductsProviderProps {
+	children: ReactNode
+}
+
+export function ProductsProvider({ children }: ProductsProviderProps) {
 	const { httpGet } = useAPI()
 	const [search, setSearch] = useState<string>('')
 	const [products, setProducts] = useState<IProduct[]>([])
 
 	const loadProducts = useCallback(async () => {
-		const products = await httpGet('/products')
-		setProducts(products ?? [])
+		try {
+			const fetchedProducts = await httpGet('/products')
+      setProducts(fetchedProducts ?? [])
+      console.log('hi')
+		} catch (error) {
+			console.error('Error loading products:', error)
+			setProducts([])
+		}
 	}, [httpGet])
 
 	useEffect(() => {
 		loadProducts()
 	}, [loadProducts])
 
+	const filteredProducts = useCallback(() => {
+		if (!search) return products
+		return new FilterProducts().execute(search, products)
+	}, [search, products])
+
+	const productById = useCallback((id: number) => 
+		products.find((product) => product.id === id) ?? null
+	, [products])
+
 	return (
 		<ProductsContext.Provider
 			value={{
 				search,
-				get products() {
-					if (!search) return products
-					return new FilterProducts().execute(search, products)
-				},
+				products: filteredProducts(),
 				setSearch,
-				productById: (id: number) =>
-					products.find((product) => product.id === id) ?? null,
+				productById,
 			}}
 		>
-			{props.children}
+			{children}
 		</ProductsContext.Provider>
 	)
 }

@@ -1,94 +1,80 @@
-'use client'
 import {
-  EnumOrderStatus,
-  EnumPurchaseType,
-  IAddressOrder,
-  ICartItem,
-  IItemOrder,
-  IOrder,
+  IOrder as Order,
+  IAddressOrder as OrderDelivery,
+  IItemOrder as OrderItem,
+  EnumPurchaseType as PaymentMethod,
+  EnumOrderStatus as Status,
 } from '@gstore/core'
-import { useRouter } from 'next/navigation'
-import { createContext, useEffect, useState } from 'react'
+import { createContext, ReactNode, useCallback, useEffect, useState } from 'react'
 import useAPI from '../hooks/useAPI'
 import useCart from '../hooks/useCart'
 import useLocalStorage from '../hooks/useLocalStorage'
 
-/**
- * Interface for the Payment Context props
- */
-export interface IPaymentContextProps {
-	paymentMethod: EnumPurchaseType
-	delivery: Partial<IAddressOrder>
-	changePaymentMethod: (paymentMethod: EnumPurchaseType) => void
-	changeDelivery: (delivery: Partial<IAddressOrder>) => void
-	finalizePurchase: () => void
+export interface PaymentContextProps {
+	paymentMethod: PaymentMethod
+	delivery: Partial<OrderDelivery>
+	updatePaymentMethod: (paymentMethod: PaymentMethod) => void
+	updateDelivery: (delivery: Partial<OrderDelivery>) => void
+	finalizePurchase: () => Promise<void>
 }
 
-const PaymentContext = createContext<IPaymentContextProps>({} as IPaymentContextProps)
+const PaymentContext = createContext<PaymentContextProps>({} as PaymentContextProps)
 
-/**
- * Payment Provider component
- * @param props - The component props
- */
-export function PaymentProvider(props: { children: React.ReactNode }) {
+interface PaymentProviderProps {
+	children: ReactNode
+}
+
+export function PaymentProvider({ children }: PaymentProviderProps) {
 	const { httpPost } = useAPI()
-	const { items, totalPrice, clearCart } = useCart()
+	const { items, totalPrice: totalValue, clearCart } = useCart()
 	const { saveItem, getItem } = useLocalStorage()
-	const router = useRouter()
 
-	const [paymentMethod, setPaymentMethod] = useState<EnumPurchaseType>(
-		EnumPurchaseType.CREDIT_CARD
-	)
-	const [delivery, setDelivery] = useState<Partial<IAddressOrder>>({})
+	const [paymentMethod, setPaymentMethod] = useState<PaymentMethod>(PaymentMethod.BANK)
+	const [delivery, setDelivery] = useState<Partial<OrderDelivery>>({})
 
-	/**
-	 * Changes the payment method and saves it to local storage
-	 * @param paymentMethod - The new payment method
-	 */
-	function changePaymentMethod(paymentMethod: EnumPurchaseType) {
-		saveItem('paymentMethod', paymentMethod)
-		setPaymentMethod(paymentMethod)
-	}
+	const updatePaymentMethod = useCallback((newPaymentMethod: PaymentMethod) => {
+		saveItem('paymentMethod', newPaymentMethod)
+		setPaymentMethod(newPaymentMethod)
+	}, [saveItem])
 
-	/**
-	 * Changes the delivery details and saves it to local storage
-	 * @param delivery - The new delivery details
-	 */
-	function changeDelivery(delivery: Partial<IAddressOrder>) {
-		saveItem('delivery', delivery)
-		setDelivery(delivery)
-	}
+	const updateDelivery = useCallback((newDelivery: Partial<OrderDelivery>) => {
+		saveItem('delivery', newDelivery)
+		setDelivery(newDelivery)
+	}, [saveItem])
 
-	/**
-	 * Finalizes the purchase by creating an order and clearing the cart
-	 */
-	async function finalizePurchase() {
-		const order: Partial<IOrder> = {
+	const finalizePurchase = useCallback(async () => {
+		const order: Partial<Order> = {
 			date: new Date(),
 			paymentMethod,
-			totalValue: totalPrice,
-			delivery: delivery as IAddressOrder,
-			status: EnumOrderStatus.DELIVERED,
-			items: items.map(
-				(item: ICartItem) =>
-					({
-						product: item.product,
-						quantity: item.quantity,
-						unitPrice: item.product.promotionalPrice,
-					}) as IItemOrder
-			),
+			totalValue,
+			delivery: delivery as OrderDelivery,
+			status: Status.DELIVERED,
+			items: items.map((item) => ({
+				product: item.product,
+				quantity: item.quantity,
+				unitPrice: item.product.promotionalPrice,
+			}) as OrderItem),
 		}
 
-		await httpPost('/orders', order)
-		clearCart()
-		router.push('/checkout/success')
-	}
+		try {
+			await httpPost('/orders', order)
+			clearCart()
+		} catch (error) {
+			console.error('Error finalizing purchase:', error)
+			throw error
+		}
+	}, [httpPost, paymentMethod, totalValue, delivery, items, clearCart])
 
 	useEffect(() => {
-		const delivery = getItem('delivery')
-		const paymentMethod = getItem('paymentMethod')
-		if (delivery) setDelivery(delivery)
-		if (paymentMethod) setPaymentMethod(paymentMethod)
+		const loadSavedData = async () => {
+			const savedDelivery = await getItem('delivery')
+			setDelivery(savedDelivery ?? {})
+
+			const savedPaymentMethod = await getItem('paymentMethod')
+			setPaymentMethod(savedPaymentMethod ?? PaymentMethod.BANK)
+		}
+
+		loadSavedData()
 	}, [getItem])
 
 	return (
@@ -96,12 +82,12 @@ export function PaymentProvider(props: { children: React.ReactNode }) {
 			value={{
 				delivery,
 				paymentMethod,
-				changeDelivery,
-				changePaymentMethod,
+				updateDelivery,
+				updatePaymentMethod,
 				finalizePurchase,
 			}}
 		>
-			{props.children}
+			{children}
 		</PaymentContext.Provider>
 	)
 }
