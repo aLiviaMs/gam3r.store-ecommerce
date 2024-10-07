@@ -1,81 +1,40 @@
-# Turborepo starter
+# Gam3r Store
 
-This is an official starter Turborepo.
+Welcome to the **Gam3r Store** project! This repository is a comprehensive e-commerce platform designed to enhance the shopping experience for gaming enthusiasts. Built with modern web technologies, Gam3r Store offers a seamless interface across web and mobile platforms.
 
-## Using this example
+## Project Overview
 
-Run the following command:
+Gam3r Store is an e-commerce application developed using the Turborepo starter. It features a robust architecture that includes:
 
-```sh
-npx create-turbo@latest
-```
+- **Backend**: Powered by NestJS, providing a scalable and efficient server-side solution.
+- **Frontend**: Developed with Next.js, offering a dynamic and responsive web interface.
+- **Mobile**: Built using React Native, ensuring a smooth and native-like experience on both iOS and Android devices.
 
-## What's inside?
+## Features
 
-This Turborepo includes the following packages/apps:
+- **User Authentication**: Secure login and registration system.
+- **Product Catalog**: Browse and search a wide range of gaming products.
+- **Shopping Cart**: Add, remove, and manage products in your cart.
+- **Order Management**: Track your orders and view past purchases.
+- **Responsive Design**: Optimized for both web and mobile platforms.
 
-### Apps and Packages
+## Screenshots View:
+![Mobile Screenshot](https://ibb.co/rww0JXR)
 
-- `docs`: a [Next.js](https://nextjs.org/) app
-- `web`: another [Next.js](https://nextjs.org/) app
-- `@repo/ui`: a stub React component library shared by both `web` and `docs` applications
-- `@repo/eslint-config`: `eslint` configurations (includes `eslint-config-next` and `eslint-config-prettier`)
-- `@repo/typescript-config`: `tsconfig.json`s used throughout the monorepo
+## Getting Started
 
-Each package/app is 100% [TypeScript](https://www.typescriptlang.org/).
+To get a copy of the project up and running on your local machine for development and testing purposes, follow these steps.
 
-### Utilities
+### Prerequisites
 
-This Turborepo has some additional tools already setup for you:
+- Node.js
+- npm or Yarn
+- Docker (optional, for containerized environments)
 
-- [TypeScript](https://www.typescriptlang.org/) for static type checking
-- [ESLint](https://eslint.org/) for code linting
-- [Prettier](https://prettier.io) for code formatting
+### Installation
 
-### Build
+1. **Clone the repository:**
 
-To build all apps and packages, run the following command:
-
-```
-cd my-turborepo
-pnpm build
-```
-
-### Develop
-
-To develop all apps and packages, run the following command:
-
-```
-cd my-turborepo
-pnpm dev
-```
-
-### Remote Caching
-
-Turborepo can use a technique known as [Remote Caching](https://turbo.build/repo/docs/core-concepts/remote-caching) to share cache artifacts across machines, enabling you to share build caches with your team and CI/CD pipelines.
-
-By default, Turborepo will cache locally. To enable Remote Caching you will need an account with Vercel. If you don't have an account you can [create one](https://vercel.com/signup), then enter the following commands:
-
-```
-cd my-turborepo
-npx turbo login
-```
-
-This will authenticate the Turborepo CLI with your [Vercel account](https://vercel.com/docs/concepts/personal-accounts/overview).
-
-Next, you can link your Turborepo to your Remote Cache by running the following command from the root of your Turborepo:
-
-```
-npx turbo link
-```
-
-## Useful Links
-
-Learn more about the power of Turborepo:
-
-- [Tasks](https://turbo.build/repo/docs/core-concepts/monorepos/running-tasks)
-- [Caching](https://turbo.build/repo/docs/core-concepts/caching)
-- [Remote Caching](https://turbo.build/repo/docs/core-concepts/remote-caching)
-- [Filtering](https://turbo.build/repo/docs/core-concepts/monorepos/filtering)
-- [Configuration Options](https://turbo.build/repo/docs/reference/configuration)
-- [CLI Usage](https://turbo.build/repo/docs/reference/command-line-reference)
+   ```bash
+   git clone https://github.com/yourusername/gam3r-store.git
+   cd gam3r-store
