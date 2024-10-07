@@ -20,21 +20,3 @@ Gam3r Store is an e-commerce application developed using the Turborepo starter. 
 
 ## Screenshots View:
 <img src="https://i.ibb.co/KrrhH8p/Simulator-Screenshot-i-Phone-15-Pro-2024-10-06-at-23-34-43.png" alt="Simulator-Screenshot-i-Phone-15-Pro-2024-10-06-at-23-34-43" border="0" width="300">
-
-## Getting Started
-
-To get a copy of the project up and running on your local machine for development and testing purposes, follow these steps.
-
-### Prerequisites
-
-- Node.js
-- npm or Yarn
-- Docker (optional, for containerized environments)
-
-### Installation
-
-1. **Clone the repository:**
-
-   ```bash
-   git clone https://github.com/yourusername/gam3r-store.git
-   cd gam3r-store
