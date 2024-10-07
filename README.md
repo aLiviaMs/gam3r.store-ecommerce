@@ -19,7 +19,7 @@ Gam3r Store is an e-commerce application developed using the Turborepo starter. 
 - **Responsive Design**: Optimized for both web and mobile platforms.
 
 ## Screenshots View:
-![Mobile Screenshot](https://ibb.co/rww0JXR)
+<img src="https://i.ibb.co/KrrhH8p/Simulator-Screenshot-i-Phone-15-Pro-2024-10-06-at-23-34-43.png" alt="Simulator-Screenshot-i-Phone-15-Pro-2024-10-06-at-23-34-43" border="0">
 
 ## Getting Started
 
